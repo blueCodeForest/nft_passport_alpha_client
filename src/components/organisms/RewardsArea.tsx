@@ -36,7 +36,7 @@ export function RewardsArea(props: RewardsAreaProps) {
     return (
       <div className='mb-6'>
         <H2
-          icon='fluent-ribbon-12-regular'
+          icon='i-fluent-ribbon-12-regular'
           rightElement={<TokenHoldings {...tokenHoldingsProps} />}
         >
           特典

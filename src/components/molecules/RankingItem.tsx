@@ -9,11 +9,11 @@ interface RankingItemProps extends INFTHolderRank {
 export function RankingItem(props: RankingItemProps) {
   const rank =
     props.rank === 1 ? (
-      <CustomIcon icon='emojione-monotone-1st-place-medal' size={5} />
+      <CustomIcon icon='i-emojione-monotone-1st-place-medal' size='sm' />
     ) : props.rank === 2 ? (
-      <CustomIcon icon='emojione-monotone-2nd-place-medal' size={5} />
+      <CustomIcon icon='i-emojione-monotone-2nd-place-medal' size='sm' />
     ) : props.rank === 3 ? (
-      <CustomIcon icon='emojione-monotone-3rd-place-medal' size={5} />
+      <CustomIcon icon='i-emojione-monotone-3rd-place-medal' size='sm' />
     ) : (
       <span>{props.rank}</span>
     );

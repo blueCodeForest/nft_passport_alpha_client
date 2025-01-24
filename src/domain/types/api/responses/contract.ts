@@ -3,7 +3,7 @@ import { paths } from 'src/types/swagger-types';
 export type UseFetchContractCoverResponseDto =
   paths['/contracts/{chainId}/{contractAddress}']['get']['responses']['200']['content']['application/json; charset=utf-8'];
 
-export type UseFetchContractInfoResponseDto =
+export type UseFetchContractWithStatsResponseDto =
   paths['/contracts/{id}']['get']['responses']['200']['content']['application/json; charset=utf-8'];
 
 export type UseFetchNFTHolderRankingResponseDto =

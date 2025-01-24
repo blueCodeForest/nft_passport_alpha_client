@@ -1,7 +1,7 @@
 export type { UseFetchHistoriesResponseDto } from './history';
 export type {
   UseFetchContractCoverResponseDto,
-  UseFetchContractInfoResponseDto,
+  UseFetchContractWithStatsResponseDto,
   UseFetchNFTHolderRankingResponseDto,
   UseMintResponseDto,
   UseMintRequestDto,
@@ -15,3 +15,7 @@ export type {
   UseExchangeRewardResponseDto,
   UseExchangeRewardRequestDto,
 } from './reward';
+export type {
+  UseFetchNFTsByWalletResponseDto,
+  UseFetchNFTBalanceResponseDto,
+} from './nft';

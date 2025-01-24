@@ -1,26 +1,35 @@
 interface CustomIconProps {
   icon: string;
-  size: number;
+  size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl';
+  className?: string;
+  color?: string;
 }
 
-export function CustomIcon({ icon, size }: CustomIconProps) {
-  const iconClass = `i-${icon} w-${size} h-${size} bg-current`;
+export function CustomIcon({
+  icon,
+  size = 'base',
+  className = '',
+  color = 'text-text',
+}: CustomIconProps) {
+  const sizeMap = {
+    xs: 0.75,
+    sm: 0.875,
+    base: 1,
+    lg: 1.125,
+    xl: 1.25,
+    '2xl': 1.5,
+  };
+
+  const rem = sizeMap[size];
+
   return (
-    <>
-      <span className={iconClass}></span>
-      {/* <span className='i-streamline-passport'></span>
-      <span className='i-majesticons-coins-line w-5 h-5'></span>
-      <span className='i-tabler-rubber-stamp'></span>
-      <span className='i-fluent-ribbon-12-regular'></span>
-      <span className='i-material-symbols-trophy-outline'></span>
-      <span className='i-iconamoon-history-fill w-7 h-7'></span>
-      <span className='i-emojione-monotone-1st-place-medal w-5 h-5'></span>
-      <span className='i-emojione-monotone-2nd-place-medal w-5 h-5'></span>
-      <span className='i-emojione-monotone-3rd-place-medal w-5 h-5'></span>
-      <span className='i-fluent-emoji-high-contrast-1st-place-medal w-5 h-5'></span>
-      <span className='i-teenyicons-wallet-alt-outline w-5 h-5'></span>
-      <span className='i-solar-layers-minimalistic-linear w-5 h-5'></span>
-      <span className='i-lucide-users w-5 h-5'></span> */}
-    </>
+    <span
+      className={`${icon} ${color} ${className} inline-flex items-center`}
+      style={{
+        width: `${rem}rem`,
+        height: `${rem}rem`,
+        verticalAlign: 'middle',
+      }}
+    ></span>
   );
 }

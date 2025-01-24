@@ -9,7 +9,7 @@ export { SocialLinks } from './SocialLinks';
 export { ContractStats } from './ContractStats';
 export { ContractAddress } from './ContractAddress';
 export { ContractTitle } from './ContractTitle';
-export { CirculatingSupply } from './CirculatingSupply';
+export { TotalSupply } from './TotalSupply';
 export { HolderCount } from './HolderCount';
 export { Attributes } from './Attributes';
 export { PassportItem } from './PassportItem';

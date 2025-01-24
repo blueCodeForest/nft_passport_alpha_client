@@ -1,0 +1,16 @@
+{
+  "name": "地球に植えようスタンプ",
+  "description": "地球に何かを植えた人に押すスタンプです。地球を植えてSDGsを達成しよう！",
+  "image": "https://nft-stamp-card-alpha-client.vercel.app/images/plant_on_earth.png",
+  "external_url": "https://example.com/plant_on_earth",
+  "attributes": [
+    {
+      "trait_type": "TokenType",
+      "value": "Stamp"
+    },
+    {
+      "trait_type": "Issuer",
+      "value": "地球に植えよう委員会"
+    }
+  ]
+}

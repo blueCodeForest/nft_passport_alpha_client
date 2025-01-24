@@ -7,3 +7,4 @@ export { paginationAdapter } from './paginationAdapter';
 export { contractCoverAdapter } from './contractCoverAdapter';
 export { passportsWithOwnerStatsAdapter } from './passportsWithOwnerStatsAdapter';
 export { passportCoversAdapter } from './passportCoversAdapter';
+export { NFTsAdapter } from './NFTsAdapter';

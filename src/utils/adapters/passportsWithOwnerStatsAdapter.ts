@@ -18,7 +18,7 @@ export function passportsWithOwnerStatsAdapter(
         type: PassportType.BRAND,
         stats: {
           rank: passport.stats.rank,
-          totalWallets: passport.stats.totalWallets,
+          totalHolders: passport.stats.totalHolders,
           holdingCoins: passport.stats.holdingCoins,
         },
         contractSymbol: passport.contractSymbol,

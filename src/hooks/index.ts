@@ -1,9 +1,11 @@
 export { useMint } from './useMint';
 export { useFetchContractCover } from './useFetchContractCover';
-export { useFetchContractInfo } from './useFetchContractInfo';
+export { useFetchContractWithStats } from './useFetchContractWithStats';
 export { useFetchPassport } from './useFetchPassport';
 export { useFetchPassportsByContract } from './useFetchPassportsByContract';
 export { useFetchPassportsByWallet } from './useFetchPassportsByWallet';
 export { useFetchHistories } from './useFetchHistories';
 export { useFetchNFTHolderRanking } from './useFetchNFTHolderRanking';
 export { useFetchRewards } from './useFetchRewards';
+export { useFetchNFTsByWallet } from './useFetchNFTsByWallet.ts';
+export { useFetchNFTBalance } from './useFetchNFTBalance';

@@ -17,6 +17,7 @@ import {
 } from 'src/components/pages';
 import { MintSuccessModalProvider } from 'src/components/organisms';
 import { SWRConfig } from 'swr';
+import { MainLayout } from 'src/components/layouts';
 (globalThis as any).Buffer = Buffer;
 
 const queryClient = new QueryClient();
@@ -29,27 +30,26 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <MintSuccessModalProvider>
             <BrowserRouter>
               <Routes>
-                <Route
-                  path='/mint/evm/:chainId/:contractAddress'
-                  element={<MintScreen />}
-                ></Route>
-                <Route
-                  path='/contract/:contractId'
-                  element={<ContractScreen />}
-                ></Route>
-                <Route
-                  path='/wallet/:walletAddress'
-                  element={<WalletScreen />}
-                ></Route>
-                <Route path='/passport' element={<PassportRoot />}>
+                <Route element={<MainLayout />}>
                   <Route
-                    path='brand/:id'
-                    element={<BrandPassportScreen />}
-                  ></Route>
+                    path='/mint/evm/:chainId/:contractAddress'
+                    element={<MintScreen />}
+                  />
                   <Route
-                    path='collection/:id'
-                    element={<CollectionPassportScreen />}
-                  ></Route>
+                    path='/contract/:contractId'
+                    element={<ContractScreen />}
+                  />
+                  <Route
+                    path='/wallet/:walletAddress'
+                    element={<WalletScreen />}
+                  />
+                  <Route path='/passport' element={<PassportRoot />}>
+                    <Route path='brand/:id' element={<BrandPassportScreen />} />
+                    <Route
+                      path='collection/:id'
+                      element={<CollectionPassportScreen />}
+                    />
+                  </Route>
                 </Route>
               </Routes>
             </BrowserRouter>

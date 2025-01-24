@@ -9,8 +9,8 @@ interface HistoryIconProps {
 export function HistoryIcon({ historyType, contractType }: HistoryIconProps) {
   if (historyType === HistoryType.MINT) {
     if (contractType === ContractType.COIN)
-      return <CustomIcon icon='majesticons-coins-line' size={5} />;
-    return <CustomIcon icon='tabler-rubber-stamp' size={5} />;
+      return <CustomIcon icon='i-majesticons-coins-line' size='lg' />;
+    return <CustomIcon icon='i-tabler-rubber-stamp' size='lg' />;
   }
-  return <CustomIcon icon='fluent-ribbon-12-regular' size={5} />;
+  return <CustomIcon icon='i-fluent-ribbon-12-regular' size='lg' />;
 }

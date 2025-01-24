@@ -25,7 +25,7 @@ export interface IContractWithStats extends IContractWithMetadata {
 
 export interface INFTContractStats {
   totalSupply: number;
-  circulatingSupply: number;
+  totalBurned: number;
   holderCount: number;
 }
 

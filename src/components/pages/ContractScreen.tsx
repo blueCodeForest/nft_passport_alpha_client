@@ -1,13 +1,14 @@
-import { H2, PassportItem } from '../molecules';
-import { useFetchContractInfo, useFetchPassportsByContract } from 'src/hooks';
+import {
+  useFetchContractWithStats,
+  useFetchPassportsByContract,
+} from 'src/hooks';
 import { useParams } from 'react-router-dom';
-import { ContractDetails } from '../organisms';
+import { ContractDetails, PassportsArea } from '../organisms';
 
 export function ContractScreen() {
   const { contractId } = useParams();
-  const { data: contract, isLoading: isLoadingContract } = useFetchContractInfo(
-    Number(contractId)
-  );
+  const { data: contract, isLoading: isLoadingContract } =
+    useFetchContractWithStats(Number(contractId));
   const { data: passports, isLoading: isLoadingPassports } =
     useFetchPassportsByContract(Number(contractId));
   if (isLoadingContract || isLoadingPassports) return <div>Loading...</div>;
@@ -17,12 +18,7 @@ export function ContractScreen() {
   return (
     <div>
       <ContractDetails contract={contract} />
-      <H2 icon='streamline-passport'>関連パスポート</H2>
-      <div className='flex flex-wrap gap-4'>
-        {passports.map((passport) => (
-          <PassportItem key={passport.id} passport={passport} />
-        ))}
-      </div>
+      <PassportsArea passports={passports} />
     </div>
   );
 }

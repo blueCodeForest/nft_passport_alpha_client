@@ -9,8 +9,8 @@ interface H2Props {
 export function H2({ icon, children, rightElement }: H2Props) {
   return (
     <div className='flex items-center justify-between mb-2 bg-white p-2'>
-      <h2 className='text-xl font-bold flex items-center gap-2'>
-        <CustomIcon icon={icon} size={7} />
+      <h2 className='text-xl font-bold flex items-center gap-1'>
+        <CustomIcon icon={icon} size='xl' />
         {children}
       </h2>
       {rightElement && <div>{rightElement}</div>}

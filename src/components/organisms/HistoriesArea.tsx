@@ -8,7 +8,7 @@ interface HistoriesAreaProps {
 export function HistoriesArea({ histories }: HistoriesAreaProps) {
   return (
     <div>
-      <H2 icon='iconamoon-history-fill'>ヒストリー</H2>
+      <H2 icon='i-iconamoon-history-fill'>ヒストリー</H2>
       {histories.map((history) => (
         <HistoryItem key={history.id} history={history} />
       ))}

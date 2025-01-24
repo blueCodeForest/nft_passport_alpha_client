@@ -11,7 +11,7 @@ interface INFTHolderRankingAreaProps {
 export function RankingArea(props: INFTHolderRankingAreaProps) {
   return (
     <div className='w-full'>
-      <H2 icon='material-symbols-trophy-outline'>ランキング</H2>
+      <H2 icon='i-material-symbols-trophy-outline'>ランキング</H2>
       {props.ranking.holders.map((holder) => (
         <RankingItem
           key={holder.walletAddress}

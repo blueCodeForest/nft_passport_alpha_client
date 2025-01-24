@@ -1,0 +1,16 @@
+{
+  "name": "お持ち帰り地球スタンプ",
+  "description": "地球を守るために、お持ち帰り地球スタンプをお持ち帰りしてください！",
+  "image": "https://nft-stamp-card-alpha-client.vercel.app/images/earth_in_pbag.png",
+  "external_url": "https://example.com/earth_in_pbag",
+  "attributes": [
+    {
+      "trait_type": "TokenType",
+      "value": "Stamp"
+    },
+    {
+      "trait_type": "Issuer",
+      "value": "みんなで地球を持ち帰ろう委員会"
+    }
+  ]
+}

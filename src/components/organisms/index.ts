@@ -9,3 +9,6 @@ export { RewardsArea } from './RewardsArea';
 export { BrandPassportHeader } from './BrandPassportHeader';
 export { ContractPreview } from './ContractPreview';
 export { ContractDetails } from './ContractDetails';
+export { PassportsArea } from './PassportsArea';
+export { OwnNFTsArea } from './OwnNFTsArea';
+export { HistoriesArea } from './HistoriesArea';

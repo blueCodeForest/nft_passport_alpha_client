@@ -1,0 +1,16 @@
+{
+  "name": "うらめしコイン",
+  "description": "お化けバーに来店の方にお渡ししてるうらめしコインです！たくさん持ってたら何か悪いことがあるかもしれません。",
+  "image": "https://nft-stamp-card-alpha-client.vercel.app/images/obake_bar.png",
+  "external_url": "https://example.com/obake_bar",
+  "attributes": [
+    {
+      "trait_type": "TokenType",
+      "value": "Coin"
+    },
+    {
+      "trait_type": "Issuer",
+      "value": "お化けバー"
+    }
+  ]
+}

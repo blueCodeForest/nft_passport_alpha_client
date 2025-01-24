@@ -1,8 +1,8 @@
 import { IContractWithStats } from 'src/domain/interface';
-import { UseFetchContractInfoResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchContractWithStatsResponseDto } from 'src/domain/types/api/responses';
 
 export function contractAdapter(
-  contractInfo: UseFetchContractInfoResponseDto
+  contractInfo: UseFetchContractWithStatsResponseDto
 ): IContractWithStats {
   return {
     id: contractInfo.contract.id,
@@ -18,7 +18,7 @@ export function contractAdapter(
     },
     stats: {
       totalSupply: contractInfo.stats.totalSupply,
-      circulatingSupply: contractInfo.stats.circulatingSupply,
+      totalBurned: contractInfo.stats.totalBurned,
       holderCount: contractInfo.stats.holderCount,
     },
   };

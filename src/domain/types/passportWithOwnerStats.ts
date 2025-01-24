@@ -9,7 +9,7 @@ interface IBrandPassportWithOwnerStats extends IPassportBase {
   type: typeof PassportType.BRAND;
   stats: {
     rank: number;
-    totalWallets: number;
+    totalHolders: number;
     holdingCoins: number;
   };
   contractSymbol: string;

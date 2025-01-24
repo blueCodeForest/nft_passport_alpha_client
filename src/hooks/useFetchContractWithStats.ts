@@ -1,11 +1,11 @@
 import useSWR from 'swr';
-import { UseFetchContractInfoResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchContractWithStatsResponseDto } from 'src/domain/types/api/responses';
 import { fetcher } from 'src/utils/apiCall';
 import { contractAdapter } from 'src/utils/adapters';
 
-export function useFetchContractInfo(contractId: number) {
+export function useFetchContractWithStats(contractId: number) {
   const { data, error, isLoading, ...rest } =
-    useSWR<UseFetchContractInfoResponseDto>(
+    useSWR<UseFetchContractWithStatsResponseDto>(
       `/contracts/${contractId}`,
       fetcher
     );

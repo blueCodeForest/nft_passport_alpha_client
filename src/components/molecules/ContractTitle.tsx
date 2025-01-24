@@ -16,10 +16,10 @@ export function ContractTitle({
   return (
     <div className={`flex items-center gap-1 ${className}`}>
       {contractType === ContractType.COIN && (
-        <CustomIcon icon='majesticons-coins-line' size={7} />
+        <CustomIcon icon='i-majesticons-coins-line' size='lg' />
       )}
       {contractType === ContractType.STAMP && (
-        <CustomIcon icon='tabler-rubber-stamp' size={7} />
+        <CustomIcon icon='i-tabler-rubber-stamp' size='lg' />
       )}
       <h2 className='text-lg font-bold'>
         {title} ({symbol})

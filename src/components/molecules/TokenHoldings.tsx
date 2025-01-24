@@ -19,7 +19,7 @@ export function TokenHoldings(props: TokenHoldingsProps) {
   if (props.tokenType === ContractType.COIN) {
     return (
       <div className='flex items-center gap-2'>
-        <CustomIcon icon='teenyicons-wallet-alt-outline' size={5} />
+        <CustomIcon icon='i-teenyicons-wallet-alt-outline' size='sm' />
         {props.holdings} {props.symbol}
       </div>
     );
@@ -27,7 +27,7 @@ export function TokenHoldings(props: TokenHoldingsProps) {
   if (props.tokenType === ContractType.STAMP) {
     return (
       <div>
-        <CustomIcon icon='teenyicons-wallet-alt-outline' size={5} />
+        <CustomIcon icon='i-teenyicons-wallet-alt-outline' size='sm' />
         {props.collectedCount} / {props.totalVarieties}
       </div>
     );

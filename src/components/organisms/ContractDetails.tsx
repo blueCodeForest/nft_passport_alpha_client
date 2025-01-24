@@ -3,7 +3,7 @@ import { ContractTitle } from '../molecules/ContractTitle';
 import { ContractAddress } from '../molecules/ContractAddress';
 import { ContractDescription } from '../atoms/ContractDescription';
 import { Attributes } from '../molecules/Attributes';
-import { CirculatingSupply, HolderCount } from '../molecules';
+import { TotalSupply, HolderCount } from '../molecules';
 
 interface ContractDetailsProps {
   contract: IContractWithStats;
@@ -28,8 +28,8 @@ export function ContractDetails({ contract }: ContractDetailsProps) {
           </div>
           <ContractDescription description={contract.metadata.description} />
           <div className='flex gap-4'>
-            <CirculatingSupply
-              circulatingSupply={contract.stats.circulatingSupply}
+            <TotalSupply
+              totalSupply={contract.stats.totalSupply}
               symbol={contract.symbol}
             />
             <HolderCount holderCount={contract.stats.holderCount} />

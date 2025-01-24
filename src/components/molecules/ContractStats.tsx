@@ -1,25 +1,22 @@
-import { CirculatingSupply } from './CirculatingSupply';
+import { TotalSupply } from './TotalSupply';
 import { HolderCount } from './HolderCount';
 
 interface ContractStatsProps {
-  circulatingSupply: number;
+  totalSupply: number;
   holderCount: number;
   symbol: string;
   className?: string;
 }
 
 export function ContractStats({
-  circulatingSupply,
+  totalSupply,
   holderCount,
   symbol,
   className,
 }: ContractStatsProps) {
   return (
     <div className={`flex flex-col gap-1 ${className}`}>
-      <CirculatingSupply
-        circulatingSupply={circulatingSupply}
-        symbol={symbol}
-      />
+      <TotalSupply totalSupply={totalSupply} symbol={symbol} />
       <HolderCount holderCount={holderCount} />
     </div>
   );

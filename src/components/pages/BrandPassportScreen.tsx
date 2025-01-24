@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { BrandPassportHeader } from '../organisms/BrandPassportHeader';
 import { RewardsArea } from '../organisms/RewardsArea';
 import { RankingArea } from '../organisms/RankingArea';
-import { useFetchContractInfo } from 'src/hooks/useFetchContractInfo';
+import { useFetchContractWithStats, useFetchNFTBalance } from 'src/hooks';
 import {
   useFetchRewards,
   useFetchNFTHolderRanking,
@@ -14,16 +14,18 @@ import {
   TokenVarietyRewardAreaProps,
 } from '../organisms/RewardsArea';
 import { isTokenQuantityRewards } from 'src/domain/guards';
+import { useAccount } from 'wagmi';
 
 export function BrandPassportScreen() {
   const { id } = useParams();
   const passportId = Number(id);
+  const { address: walletAddress } = useAccount();
 
   const {
     data: contractData,
     error: contractError,
     isLoading: contractLoading,
-  } = useFetchContractInfo(passportId);
+  } = useFetchContractWithStats(passportId);
 
   const {
     data: passportData,
@@ -43,11 +45,29 @@ export function BrandPassportScreen() {
     isLoading: rankingLoading,
   } = useFetchNFTHolderRanking(passportId);
 
-  if (contractLoading || rewardsLoading || rankingLoading || passportLoading) {
+  const {
+    data: nftBalanceData,
+    error: nftBalanceError,
+    isLoading: nftBalanceLoading,
+  } = useFetchNFTBalance(contractData?.id, walletAddress);
+
+  if (
+    contractLoading ||
+    rewardsLoading ||
+    rankingLoading ||
+    passportLoading ||
+    nftBalanceLoading
+  ) {
     return <div>読み込み中...</div>;
   }
 
-  if (contractError || rewardsError || rankingError || passportError) {
+  if (
+    contractError ||
+    rewardsError ||
+    rankingError ||
+    passportError ||
+    nftBalanceError
+  ) {
     return <div>エラーが発生しました</div>;
   }
 
@@ -60,7 +80,7 @@ export function BrandPassportScreen() {
         rewardType: RewardType.TOKEN_QUANTITY,
         tokenType: contractData.type,
         rewards: rewardsData,
-        holdings: 4,
+        holdings: nftBalanceData,
         symbol: contractData.symbol,
       } as TokenQuantityRewardAreaProps)
     : ({
@@ -71,7 +91,7 @@ export function BrandPassportScreen() {
       } as TokenVarietyRewardAreaProps);
 
   return (
-    <div className='container max-w-screen-sm'>
+    <div className='container max-w-screen-sm mt-2'>
       <BrandPassportHeader passport={passportData} contract={contractData} />
       <RewardsArea {...rewardsProps} />
       <RankingArea

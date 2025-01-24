@@ -63,7 +63,7 @@ export interface paths {
             cookie?: never;
         };
         /** コントラクト情報取得 */
-        get: operations["ContractController_getContractInfo"];
+        get: operations["ContractController_getContractWithStats"];
         put?: never;
         post?: never;
         delete?: never;
@@ -174,6 +174,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/nfts/{contractId}/balance": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** NFT保有量取得 */
+        get: operations["NFTController_getNFTBalance"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/nfts": {
         parameters: {
             query?: never;
@@ -269,10 +286,10 @@ export interface components {
             totalSupply: number;
             /** @description 保有者数 */
             holderCount: number;
-            /** @description 流通量 */
-            circulatingSupply: number;
+            /** @description 総バーン量 */
+            totalBurned: number;
         };
-        GetContractInfoResponseDto: {
+        GetContractWithStatsResponseDto: {
             contract: components["schemas"]["ContractWithMetadataDto"];
             stats: components["schemas"]["ContractStatsDto"];
         };
@@ -320,7 +337,7 @@ export interface components {
             /** @description ランク */
             rank: number;
             /** @description コインを所有してる総ウォレット数 */
-            totalWallets: number;
+            totalHolders: number;
             /** @description 保有コイン数 */
             holdingCoins: number;
         };
@@ -567,6 +584,13 @@ export interface components {
             histories: (components["schemas"]["MintHistoryDto"] | components["schemas"]["TokenQuantityRewardHistoryDto"] | components["schemas"]["TokenVarietyRewardHistoryDto"])[];
             pagination: components["schemas"]["PaginationDto"];
         };
+        GetNFTBalanceResponseDto: {
+            /**
+             * @description NFT保有量
+             * @example 5
+             */
+            balance: number;
+        };
         NFTWithContractDto: {
             metadata: components["schemas"]["MetadataDto"];
             quantity: number;
@@ -719,7 +743,7 @@ export interface operations {
             };
         };
     };
-    ContractController_getContractInfo: {
+    ContractController_getContractWithStats: {
         parameters: {
             query?: never;
             header?: never;
@@ -737,7 +761,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json; charset=utf-8": components["schemas"]["GetContractInfoResponseDto"];
+                    "application/json; charset=utf-8": components["schemas"]["GetContractWithStatsResponseDto"];
                 };
             };
             /** @description 無効なリクエスト */
@@ -930,6 +954,46 @@ export interface operations {
             };
             /** @description 無効なリクエスト */
             400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    NFTController_getNFTBalance: {
+        parameters: {
+            query: {
+                /** @description ウォレットアドレス */
+                wa: string;
+            };
+            header?: never;
+            path: {
+                /** @description コントラクトID */
+                contractId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json; charset=utf-8": components["schemas"]["GetNFTBalanceResponseDto"];
+                };
+            };
+            /** @description 無効なリクエスト */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description コントラクトが見つかりません */
+            404: {
                 headers: {
                     [name: string]: unknown;
                 };
