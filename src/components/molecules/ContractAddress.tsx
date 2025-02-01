@@ -11,7 +11,7 @@ export function ContractAddress({
 }: ContractAddressProps) {
   return (
     <div className='flex items-center gap-1'>
-      <PolygonIcon px={11} />
+      {(chainId === 137 || chainId === 80002) && <PolygonIcon px={11} />}
       <span className='text-xs text-darkGray'>
         {contractAddress.slice(0, 6)}...
         {contractAddress.slice(-4)}

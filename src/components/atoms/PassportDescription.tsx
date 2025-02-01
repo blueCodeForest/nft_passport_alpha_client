@@ -1,13 +1,7 @@
-import { IPassportLinks } from 'src/domain/interface';
-
 interface PassportDescriptionProps {
   description: string;
-  links?: IPassportLinks;
 }
 
-export function PassportDescription({
-  description,
-  links,
-}: PassportDescriptionProps) {
+export function PassportDescription({ description }: PassportDescriptionProps) {
   return <div>{description}</div>;
 }
