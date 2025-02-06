@@ -2,10 +2,10 @@
   "builds": [
     {
       "src": "dist/**/*",
-      "use": "@vercel/node"
+      "use": "@vercel/static"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
       "source": "/(.*)",
       "destination": "/index.html"

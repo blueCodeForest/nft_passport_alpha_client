@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  base: '/', // ビルド時のパス設定（Vercelで正しく動作させる）
+  base: './', // ビルド時のパス設定（Vercelで正しく動作させる）
   plugins: [react()],
   resolve: {
     alias: {
