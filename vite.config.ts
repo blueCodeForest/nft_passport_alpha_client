@@ -6,18 +6,19 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  base: '/',
+  base: '/', // ビルド時のパス設定（Vercelで正しく動作させる）
   plugins: [react()],
   resolve: {
     alias: {
-      src: path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, 'src'), // `src` のエイリアスを `@` に変更（よく使われる形）
     },
   },
   server: {
-    host: '0.0.0.0', // ローカルネットワーク上のデバイスからアクセス可能
+    host: '0.0.0.0',
     port: 5173,
   },
   build: {
     outDir: 'dist', // Vercel で `dist/` を正しく使うための設定
+    emptyOutDir: true, // 古いビルドを削除してから新しいビルドを作成
   },
 });
