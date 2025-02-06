@@ -19,7 +19,9 @@ interface RewardExchangeModalProps {
 
 export function RewardExchangeModal(props: RewardExchangeModalProps) {
   const { address } = useAccount();
-  const { trigger: exchangeReward, isMutating } = useExchangeReward();
+  const { trigger: exchangeReward, isMutating } = useExchangeReward(
+    props.reward.id
+  );
   const [error, setError] = useState<string | null>(null);
   const [exchangeSuccess, setExchangeSuccess] = useState(false);
   const [exchangeTime, setExchangeTime] = useState<string | null>(null);
@@ -37,7 +39,6 @@ export function RewardExchangeModal(props: RewardExchangeModalProps) {
     try {
       setError(null);
       await exchangeReward({
-        id: props.reward.id,
         walletAddress: address,
       });
       setExchangeSuccess(true);
