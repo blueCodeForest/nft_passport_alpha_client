@@ -13,7 +13,7 @@ export function Attributes({ attributes }: AttributesProps) {
         attributes.map((attribute, index) => (
           <Attribute
             key={index}
-            traitType={attribute.trait_type}
+            traitType={attribute.traitType}
             value={attribute.value}
           />
         ))}
