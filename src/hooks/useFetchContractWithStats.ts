@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { UseFetchContractWithStatsResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchContractWithStatsResponseDto } from 'src/domain/types/api';
 import { fetcher } from 'src/utils/apiCall';
 import { contractAdapter } from 'src/utils/adapters';
 

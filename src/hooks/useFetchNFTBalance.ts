@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { fetcher } from 'src/utils/apiCall';
-import { UseFetchNFTBalanceResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchNFTBalanceResponseDto } from 'src/domain/types/api';
 import { Maybe } from 'src/utils/utility';
 
 export function useFetchNFTBalance(
@@ -12,7 +12,6 @@ export function useFetchNFTBalance(
       `/nfts/${contractId}/balance?wa=${walletAddress}`,
       fetcher
     );
-
   return {
     data: data ? data.balance : 0,
     error,

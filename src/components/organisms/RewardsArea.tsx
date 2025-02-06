@@ -27,6 +27,7 @@ export interface TokenVarietyRewardAreaProps {
 }
 
 export function RewardsArea(props: RewardsAreaProps) {
+  console.log('props', props);
   if (props.rewardType === RewardType.TOKEN_QUANTITY) {
     const tokenHoldingsProps: CoinHoldings = {
       tokenType: props.tokenType,
@@ -39,7 +40,7 @@ export function RewardsArea(props: RewardsAreaProps) {
           icon='i-fluent-ribbon-12-regular'
           rightElement={<TokenHoldings {...tokenHoldingsProps} />}
         >
-          特典
+          報酬
         </H2>
         {props.rewards.map((reward) => (
           <RewardItem

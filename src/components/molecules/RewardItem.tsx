@@ -1,4 +1,6 @@
 import { Reward, RewardType } from 'src/domain/types';
+import { RewardExchangeModal } from '../organisms/RewardExchangeModal';
+import { useState } from 'react';
 
 interface RewardItemProps {
   key: number;
@@ -8,25 +10,36 @@ interface RewardItemProps {
 }
 
 export function RewardItem(props: RewardItemProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   if (props.reward.type === RewardType.TOKEN_QUANTITY) {
     return (
-      <div className='flex items-center justify-between border-b-2 border-dashed border-lightGray px-2 py-4'>
-        <span>{props.reward.name}</span>
-        {props.holdings >= props.reward.condition.cost && (
-          <div className='flex items-center justify-center w-24 rounded-md border-2 border-darkGray bg-transparent text-darkGray font-bold'>
-            <span>
-              {props.reward.condition.cost} {props.symbol}
-            </span>
-          </div>
-        )}
-        {props.holdings < props.reward.condition.cost && (
-          <div className='flex items-center justify-center w-24 rounded-md bg-lightGray text-white font-bold'>
-            <span>
-              {props.reward.condition.cost} {props.symbol}
-            </span>
-          </div>
-        )}
-      </div>
+      <>
+        <div className='flex items-center justify-between border-b-2 border-dashed border-lightGray px-2 py-4'>
+          <span>{props.reward.name}</span>
+          <button onClick={() => setIsModalOpen(true)}>
+            <div
+              className={`flex items-center justify-center w-24 rounded-md ${
+                props.holdings >= props.reward.condition.cost
+                  ? 'border-2 border-darkGray bg-transparent text-darkGray'
+                  : 'bg-lightGray text-white'
+              } font-bold`}
+            >
+              <span>
+                {props.reward.condition.cost} {props.symbol}
+              </span>
+            </div>
+          </button>
+        </div>
+
+        <RewardExchangeModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          reward={props.reward}
+          symbol={props.symbol}
+          isEnabled={props.holdings >= props.reward.condition.cost}
+        />
+      </>
     );
   }
 }

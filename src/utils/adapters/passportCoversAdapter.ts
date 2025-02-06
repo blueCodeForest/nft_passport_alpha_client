@@ -1,5 +1,5 @@
 import { IPassportBase } from 'src/domain/interface/iPassport';
-import { UseFetchPassportsByContractResponseDto } from 'src/domain/types/api/responses/passport';
+import { UseFetchPassportsByContractResponseDto } from 'src/domain/types/api/passport';
 
 export function passportCoversAdapter(
   covers: UseFetchPassportsByContractResponseDto['passports']

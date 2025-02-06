@@ -1,39 +1,87 @@
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { MintArea } from 'src/components/organisms';
-import { useFetchContractCover, useMint } from 'src/hooks';
-import { useMintSuccessModal } from '../organisms/MintSuccessModalContext';
-import { isContractType } from 'src/domain/types';
+import { ContractType } from 'src/domain/types';
+import {
+  useFetchContractCover,
+  useMint,
+  useMintModal,
+  useWalletConnection,
+} from 'src/hooks';
+import { useEffect, useState } from 'react';
 
 export function MintScreen() {
   const navigate = useNavigate();
-  // const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const { setShowMintSuccessModal, setContractType } = useMintSuccessModal();
+  const { showMintingModal, showSuccessModal, showErrorModal } = useMintModal();
   const { chainId, contractAddress } = useParams();
   const [searchParams] = useSearchParams();
   const mintAuthKey = searchParams.get('mak');
-  const walletAddress = '0xccEbb7C015FAb6e0a35FFdc7d5Fa73AB32af50cB';
-
+  const {
+    connectWallet,
+    address: walletAddress,
+    isConnected,
+  } = useWalletConnection();
   const { trigger, error } = useMint(Number(chainId), contractAddress || '');
-  const handleMint = async () => {
-    if (!mintAuthKey) {
-      console.error('mintAuthKey is required');
-      return;
+  const [shouldMint, setShouldMint] = useState(false);
+
+  useEffect(() => {
+    if (shouldMint && isConnected && walletAddress) {
+      executeMint();
     }
+  }, [shouldMint, isConnected, walletAddress]);
+
+  const executeMint = async () => {
+    if (!mintAuthKey) return;
+
+    showMintingModal();
 
     try {
       const result = await trigger({
         mintAuthKey,
-        walletAddress,
+        walletAddress: walletAddress!,
       });
       console.log('Mint successful:', result);
-      setContractType(
-        isContractType(contractData?.type) ? contractData?.type : null
-      );
-      setShowMintSuccessModal(true);
-      navigate(`/wallet/${walletAddress}`);
+      const mintedNFT = {
+        chainId: Number(chainId),
+        contractAddress: contractAddress || '',
+        tokenId: result.tokenId,
+        imageUrl: contractData?.imageUrl || '',
+      };
+
+      showSuccessModal({
+        contractType: contractData?.type || ContractType.COIN,
+        imageUrl: contractData?.imageUrl || '',
+        name: contractData?.name || '',
+      });
+      navigate(`/wallet/${walletAddress}`, { state: { mintedNFT } });
     } catch (err) {
       console.error('Mint failed:', error);
+      showErrorModal();
     }
+  };
+
+  const handleMint = async () => {
+    if (!mintAuthKey) {
+      alert(
+        'うまく情報が読み込めません。\nもう一度QRコードをスキャンしてください。'
+      );
+      console.error('mintAuthKey is required');
+      return;
+    }
+
+    setShouldMint(true);
+
+    if (!isConnected) {
+      try {
+        await connectWallet();
+      } catch (err) {
+        console.error('Wallet connection failed:', err);
+        showErrorModal();
+        setShouldMint(false);
+      }
+      return;
+    }
+
+    executeMint();
   };
 
   const {

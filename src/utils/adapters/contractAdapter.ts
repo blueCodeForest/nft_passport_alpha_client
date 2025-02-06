@@ -1,5 +1,5 @@
 import { IContractWithStats } from 'src/domain/interface';
-import { UseFetchContractWithStatsResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchContractWithStatsResponseDto } from 'src/domain/types/api';
 
 export function contractAdapter(
   contractInfo: UseFetchContractWithStatsResponseDto

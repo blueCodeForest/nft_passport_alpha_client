@@ -1,6 +1,6 @@
 import { PassportType } from 'src/domain/types';
 import { PassportWithOwnerStats } from 'src/domain/types/passportWithOwnerStats';
-import { UseFetchPassportsByWalletResponseDto } from 'src/domain/types/api/responses/passport';
+import { UseFetchPassportsByWalletResponseDto } from 'src/domain/types/api/passport';
 
 export function passportsWithOwnerStatsAdapter(
   passports: UseFetchPassportsByWalletResponseDto['passports']

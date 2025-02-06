@@ -14,12 +14,12 @@ import {
   TokenVarietyRewardAreaProps,
 } from '../organisms/RewardsArea';
 import { isTokenQuantityRewards } from 'src/domain/guards';
-import { useAccount } from 'wagmi';
+import { useWalletConnection } from 'src/hooks';
 
 export function BrandPassportScreen() {
   const { id } = useParams();
   const passportId = Number(id);
-  const { address: walletAddress } = useAccount();
+  const { address: walletAddress } = useWalletConnection();
 
   const {
     data: contractData,

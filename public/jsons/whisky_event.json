@@ -1,6 +1,6 @@
 {
   "name": "来場証明コイン",
-  "description": "ウイスキーイベントの来場証明コインです。たくさん貯めて特典と交換しよう！",
+  "description": "ウイスキーイベントの来場証明コインです。たくさん貯めて報酬と交換しよう！",
   "image": "https://nft-stamp-card-alpha-client.vercel.app/images/whiskey_event.png",
   "external_url": "https://example.com/whisky_event",
   "attributes": [

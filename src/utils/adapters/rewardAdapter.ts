@@ -1,5 +1,5 @@
 import { Reward, RewardType } from 'src/domain/types';
-import { UseFetchRewardsResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchRewardsResponseDto } from 'src/domain/types/api';
 
 export function rewardsAdapter(
   rewards: UseFetchRewardsResponseDto['rewards']

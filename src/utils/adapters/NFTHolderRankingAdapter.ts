@@ -1,5 +1,5 @@
 import { INFTHolderRanking } from 'src/domain/interface';
-import { UseFetchNFTHolderRankingResponseDto } from '../../domain/types/api/responses';
+import { UseFetchNFTHolderRankingResponseDto } from '../../domain/types/api';
 
 export function NFTHolderRankingAdapter(
   ranking: UseFetchNFTHolderRankingResponseDto['ranking']

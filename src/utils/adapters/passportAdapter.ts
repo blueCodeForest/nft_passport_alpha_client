@@ -1,5 +1,5 @@
 import { IPassport } from 'src/domain/interface';
-import { UseFetchPassportResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchPassportResponseDto } from 'src/domain/types/api';
 
 export function passportAdapter(
   passport: UseFetchPassportResponseDto['passport']

@@ -1,4 +1,4 @@
-import { UseFetchPassportResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchPassportResponseDto } from 'src/domain/types/api';
 import { passportAdapter } from 'src/utils/adapters';
 import { fetcher } from 'src/utils/apiCall';
 import useSWR from 'swr';

@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { fetcher } from 'src/utils/apiCall';
-import { UseFetchHistoriesResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchHistoriesResponseDto } from 'src/domain/types/api';
 import { historiesAdapter } from 'src/utils/adapters';
 
 export function useFetchHistories(walletAddress: string) {

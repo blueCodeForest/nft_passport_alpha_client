@@ -9,3 +9,6 @@ export { useFetchNFTHolderRanking } from './useFetchNFTHolderRanking';
 export { useFetchRewards } from './useFetchRewards';
 export { useFetchNFTsByWallet } from './useFetchNFTsByWallet.ts';
 export { useFetchNFTBalance } from './useFetchNFTBalance';
+export { useExchangeReward } from './useExchangeReward';
+export { useWalletConnection } from './useWalletConnection';
+export { useMintModal } from './useMintModal';

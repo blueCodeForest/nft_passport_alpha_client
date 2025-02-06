@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { fetcher } from 'src/utils/apiCall';
-import { UseFetchContractCoverResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchContractCoverResponseDto } from 'src/domain/types/api';
 import { contractCoverAdapter } from 'src/utils/adapters';
 
 export function useFetchContractCover(

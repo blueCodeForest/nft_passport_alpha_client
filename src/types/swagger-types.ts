@@ -4,22 +4,6 @@
  */
 
 export interface paths {
-    "/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["AppController_getHello"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/contracts/{id}/ranking": {
         parameters: {
             query?: never;
@@ -123,7 +107,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/rewards/exchange": {
+    "/rewards/{id}/exchange": {
         parameters: {
             query?: never;
             header?: never;
@@ -132,7 +116,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** 特典交換 */
+        /** 報酬交換 */
         post: operations["RewardController_exchangeReward"];
         delete?: never;
         options?: never;
@@ -147,25 +131,8 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** 特典一覧 */
+        /** 報酬一覧 */
         get: operations["RewardController_getRewards"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/histories": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** ヒストリー一覧取得 */
-        get: operations["HistoryController_getHistories"];
         put?: never;
         post?: never;
         delete?: never;
@@ -199,7 +166,24 @@ export interface paths {
             cookie?: never;
         };
         /** 保有NFT一覧取得 */
-        get: operations["NFTController_getNFTsByWalletAddress"];
+        get: operations["NFTController_getNFTHoldingsForWallet"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/histories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** ヒストリー一覧取得 */
+        get: operations["HistoryController_getHistoriesByWalletAddress"];
         put?: never;
         post?: never;
         delete?: never;
@@ -254,7 +238,7 @@ export interface components {
         };
         AttributeDto: {
             /** @description 属性名 */
-            trait_type: string;
+            traitType: string;
             /** @description 属性値 */
             value: string;
         };
@@ -326,6 +310,11 @@ export interface components {
              * @example 0x123...
              */
             walletAddress: string;
+            /**
+             * @description トークンID
+             * @example 1
+             */
+            tokenId: number;
             /**
              * Format: date-time
              * @description 作成日時
@@ -428,20 +417,14 @@ export interface components {
             passport: components["schemas"]["PassportDto"];
         };
         ExchangeRewardRequestDto: {
-            /** @description 特典ID */
-            id: number;
             /** @description ウォレットアドレス */
             walletAddress: string;
-            /** @description 署名 */
-            sig: string;
         };
         ExchangeRewardResponseDto: {
-            /** @description 特典ID */
+            /** @description 報酬ID */
             id: number;
             /** @description ウォレットアドレス */
             walletAddress: string;
-            /** @description ステータス */
-            status: string;
         };
         TokenQuantityRewardConditionDto: {
             /** @description コントラクトID */
@@ -450,12 +433,12 @@ export interface components {
             cost: number;
         };
         TokenQuantityRewardDto: {
-            /** @description 特典ID */
+            /** @description 報酬ID */
             id: number;
-            /** @description 特典名 */
+            /** @description 報酬名 */
             name: string;
             /**
-             * @description 特典タイプ
+             * @description 報酬タイプ
              * @enum {string}
              */
             type: "tokenQuantity";
@@ -479,12 +462,12 @@ export interface components {
             minimumVarietyCount: number;
         };
         TokenVarietyRewardDto: {
-            /** @description 特典ID */
+            /** @description 報酬ID */
             id: number;
-            /** @description 特典名 */
+            /** @description 報酬名 */
             name: string;
             /**
-             * @description 特典タイプ
+             * @description 報酬タイプ
              * @enum {string}
              */
             type: "tokenVariety";
@@ -501,8 +484,15 @@ export interface components {
         };
         GetRewardsResponseDto: {
             rewards: (components["schemas"]["TokenQuantityRewardDto"] | components["schemas"]["TokenVarietyRewardDto"])[];
-            /** @description 総特典数 */
+            /** @description 総報酬数 */
             totalCount: number;
+        };
+        GetNFTBalanceResponseDto: {
+            /**
+             * @description NFT保有量
+             * @example 5
+             */
+            balance: number;
         };
         ContractBasicInfoDto: {
             /** @description コントラクトID */
@@ -515,6 +505,15 @@ export interface components {
             symbol: string;
             /** @description コントラクトタイプ */
             type: components["schemas"]["ContractType"];
+        };
+        NFTWithContractDto: {
+            metadata: components["schemas"]["MetadataDto"];
+            quantity: number;
+            /** @description コントラクト情報 */
+            contract: components["schemas"]["ContractBasicInfoDto"];
+        };
+        GetNFTHoldingsForWalletsResponseDto: {
+            nfts: components["schemas"]["NFTWithContractDto"][];
         };
         NFTWithQuantityDto: {
             metadata: components["schemas"]["MetadataDto"];
@@ -584,22 +583,6 @@ export interface components {
             histories: (components["schemas"]["MintHistoryDto"] | components["schemas"]["TokenQuantityRewardHistoryDto"] | components["schemas"]["TokenVarietyRewardHistoryDto"])[];
             pagination: components["schemas"]["PaginationDto"];
         };
-        GetNFTBalanceResponseDto: {
-            /**
-             * @description NFT保有量
-             * @example 5
-             */
-            balance: number;
-        };
-        NFTWithContractDto: {
-            metadata: components["schemas"]["MetadataDto"];
-            quantity: number;
-            /** @description コントラクト情報 */
-            contract: components["schemas"]["ContractBasicInfoDto"];
-        };
-        GetNFTsByWalletAddressResponseDto: {
-            nfts: components["schemas"]["NFTWithContractDto"][];
-        };
     };
     responses: never;
     parameters: never;
@@ -609,23 +592,6 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    AppController_getHello: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
     ContractController_getNFTHolderRanking: {
         parameters: {
             query: {
@@ -874,7 +840,9 @@ export interface operations {
         parameters: {
             query?: never;
             header?: never;
-            path?: never;
+            path: {
+                id: number;
+            };
             cookie?: never;
         };
         requestBody: {
@@ -894,6 +862,13 @@ export interface operations {
             };
             /** @description 無効なリクエスト */
             400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description 報酬交換の条件を満たしてません */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -920,36 +895,6 @@ export interface operations {
                 };
                 content: {
                     "application/json; charset=utf-8": components["schemas"]["GetRewardsResponseDto"];
-                };
-            };
-            /** @description 無効なリクエスト */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    HistoryController_getHistories: {
-        parameters: {
-            query: {
-                /** @description ウォレットアドレス */
-                wa: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description 成功 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json; charset=utf-8": components["schemas"]["GetHistoriesResponseDto"];
                 };
             };
             /** @description 無効なリクエスト */
@@ -1001,10 +946,10 @@ export interface operations {
             };
         };
     };
-    NFTController_getNFTsByWalletAddress: {
+    NFTController_getNFTHoldingsForWallet: {
         parameters: {
             query: {
-                /** @description コォレットアドレス */
+                /** @description ウォレットアドレス */
                 wa: string;
             };
             header?: never;
@@ -1019,7 +964,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json; charset=utf-8": components["schemas"]["GetNFTsByWalletAddressResponseDto"];
+                    "application/json; charset=utf-8": components["schemas"]["GetNFTHoldingsForWalletsResponseDto"];
                 };
             };
             /** @description 無効なリクエスト */
@@ -1031,6 +976,36 @@ export interface operations {
             };
             /** @description コントラクトが存在しない */
             404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    HistoryController_getHistoriesByWalletAddress: {
+        parameters: {
+            query: {
+                /** @description ウォレットアドレス */
+                wa: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json; charset=utf-8": components["schemas"]["GetHistoriesResponseDto"];
+                };
+            };
+            /** @description 無効なリクエスト */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };

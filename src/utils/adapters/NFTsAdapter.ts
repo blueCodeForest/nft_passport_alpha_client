@@ -1,5 +1,5 @@
 import { INFTWithContract } from 'src/domain/interface';
-import { UseFetchNFTsByWalletResponseDto } from '../../domain/types/api/responses';
+import { UseFetchNFTsByWalletResponseDto } from '../../domain/types/api';
 
 export function NFTsAdapter(
   nfts: UseFetchNFTsByWalletResponseDto['nfts']

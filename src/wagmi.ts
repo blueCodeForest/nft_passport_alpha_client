@@ -1,21 +1,20 @@
-import { http, createConfig } from 'wagmi';
-import { mainnet, sepolia, baseSepolia } from 'wagmi/chains';
+import { http, createConfig, type Config } from 'wagmi';
+import { polygonAmoy, polygon } from 'wagmi/chains';
 import { coinbaseWallet } from 'wagmi/connectors';
 
-export const config = createConfig({
-  chains: [mainnet, sepolia, baseSepolia],
+export const config: Config = createConfig({
+  chains: [polygon, polygonAmoy],
   connectors: [
     coinbaseWallet({
-      appName: 'Create Wagmi',
+      appName: 'NFT Passport',
       preference: {
         options: 'smartWalletOnly',
       },
     }),
   ],
   transports: {
-    [mainnet.id]: http(),
-    [sepolia.id]: http(),
-    [baseSepolia.id]: http(),
+    [polygon.id]: http(),
+    [polygonAmoy.id]: http(),
   },
 });
 

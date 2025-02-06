@@ -1,4 +1,4 @@
-import { UseFetchHistoriesResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchHistoriesResponseDto } from 'src/domain/types/api';
 import { History } from 'src/domain/types';
 import { HistoryType } from 'src/domain/types/historyType';
 import { RewardType } from 'src/domain/types/rewardType';

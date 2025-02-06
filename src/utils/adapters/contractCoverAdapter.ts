@@ -1,5 +1,5 @@
 import { IContractCover } from 'src/domain/interface';
-import { UseFetchContractCoverResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchContractCoverResponseDto } from 'src/domain/types/api';
 
 export function contractCoverAdapter(
   contractCover: UseFetchContractCoverResponseDto

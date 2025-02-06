@@ -1,4 +1,4 @@
-import { UseFetchRewardsResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchRewardsResponseDto } from 'src/domain/types/api';
 import { fetcher } from 'src/utils/apiCall';
 import useSWR from 'swr';
 import { rewardsAdapter } from 'src/utils/adapters';

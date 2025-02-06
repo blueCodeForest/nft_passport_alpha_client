@@ -4,6 +4,7 @@ import { ITokenQuantityReward, ITokenVarietyReward } from '../interface';
 export function isTokenQuantityRewards(
   rewards: Reward[]
 ): rewards is ITokenQuantityReward[] {
+  console.log('rewards', rewards);
   return rewards.every((reward) => reward.type === RewardType.TOKEN_QUANTITY);
 }
 

@@ -15,7 +15,7 @@ import {
   CollectionPassportScreen,
   ContractScreen,
 } from 'src/components/pages';
-import { MintSuccessModalProvider } from 'src/components/organisms';
+import { MintModalProvider } from 'src/components/organisms';
 import { SWRConfig } from 'swr';
 import { MainLayout } from 'src/components/layouts';
 (globalThis as any).Buffer = Buffer;
@@ -27,7 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <SWRConfig>
-          <MintSuccessModalProvider>
+          <MintModalProvider>
             <BrowserRouter>
               <Routes>
                 <Route element={<MainLayout />}>
@@ -53,7 +53,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 </Route>
               </Routes>
             </BrowserRouter>
-          </MintSuccessModalProvider>
+          </MintModalProvider>
         </SWRConfig>
       </QueryClientProvider>
     </WagmiProvider>

@@ -1,11 +1,10 @@
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { CustomIcon } from '../atoms/CustomIcon';
+import { useWalletConnection } from 'src/hooks';
 
 export function MainLayout() {
-  const { address, isConnected } = useAccount();
-  const { connect, connectors } = useConnect();
-  const { disconnect } = useDisconnect();
+  const { connectWallet, address, isConnected, disconnect } =
+    useWalletConnection();
   const navigate = useNavigate();
 
   const handleAddressClick = () => {
@@ -38,7 +37,7 @@ export function MainLayout() {
               </div>
             ) : (
               <button
-                onClick={() => connect({ connector: connectors[0] })}
+                onClick={async () => await connectWallet()}
                 className='text-sm text-blue-500'
               >
                 ウォレット接続

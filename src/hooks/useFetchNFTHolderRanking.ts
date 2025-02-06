@@ -1,4 +1,4 @@
-import { UseFetchNFTHolderRankingResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchNFTHolderRankingResponseDto } from 'src/domain/types/api';
 import { fetcher } from 'src/utils/apiCall';
 import useSWR from 'swr';
 import { NFTHolderRankingAdapter, paginationAdapter } from 'src/utils/adapters';

@@ -5,10 +5,11 @@ import {
 } from 'src/hooks';
 import { useParams } from 'react-router-dom';
 import { HistoriesArea, PassportsArea, OwnNFTsArea } from '../organisms';
-import { useAccount } from 'wagmi';
+import { useWalletConnection } from 'src/hooks';
+
 export function WalletScreen() {
   const { walletAddress: paramWalletAddress } = useParams();
-  const { address: connectedWalletAddress } = useAccount();
+  const { address: connectedWalletAddress } = useWalletConnection();
 
   const {
     data: nftsData,

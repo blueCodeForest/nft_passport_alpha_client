@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { fetcher } from 'src/utils/apiCall';
-import { UseFetchNFTsByWalletResponseDto } from 'src/domain/types/api/responses';
+import { UseFetchNFTsByWalletResponseDto } from 'src/domain/types/api';
 import { NFTsAdapter } from 'src/utils/adapters';
 
 export function useFetchNFTsByWallet(walletAddress: string) {
