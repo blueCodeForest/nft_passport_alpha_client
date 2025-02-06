@@ -9,7 +9,7 @@ class APIError extends Error {
   }
 }
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
 export const fetcher = async (targetPath: string) => {
   const res = await fetch(new URL(targetPath, BASE_URL));
