@@ -2,10 +2,12 @@ export interface IMetadata {
   name: string;
   imageUrl: string;
   description?: string;
+  animationUrl?: string;
+  externalUrl?: string;
   attributes?: IAttribute[];
 }
 
 export interface IAttribute {
-  trait_type: string;
+  traitType: string;
   value: string;
 }

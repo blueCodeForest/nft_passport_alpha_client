@@ -5,16 +5,11 @@ import {
   UseExchangeRewardRequestDto,
 } from 'src/domain/types/api';
 
-export const useExchangeReward = () => {
+export const useExchangeReward = (id: number) => {
   return useSWRMutation<
     UseExchangeRewardResponseDto,
     Error,
     string,
     UseExchangeRewardRequestDto
-  >('/rewards/exchange', (url, { arg }) =>
-    mutator(`/rewards/${arg.id}/exchange`, {
-      method: 'POST',
-      body: { walletAddress: arg.walletAddress },
-    })
-  );
+  >(`/rewards/${id}/exchange`, (url, { arg }) => mutator(url, { arg }));
 };
