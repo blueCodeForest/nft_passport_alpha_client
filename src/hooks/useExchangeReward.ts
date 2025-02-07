@@ -11,5 +11,5 @@ export const useExchangeReward = (id: number) => {
     Error,
     string,
     UseExchangeRewardRequestDto
-  >(`/rewards/${id}/exchange`, (url, { arg }) => mutator(url, { arg }));
+  >(`/rewards/${id}/exchange`, (url, { arg }) => mutator(url, arg));
 };

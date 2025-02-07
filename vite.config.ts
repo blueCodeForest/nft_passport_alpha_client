@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  base: '/', // ビルド時のパス設定（Vercelで正しく動作させる）
+  base: '/',
   plugins: [react()],
   resolve: {
     alias: {
@@ -18,7 +18,7 @@ export default defineConfig({
     port: 5173,
   },
   build: {
-    outDir: 'dist', // Vercel で `dist/` を正しく使うための設定
-    emptyOutDir: true, // 古いビルドを削除してから新しいビルドを作成
+    outDir: 'dist',
+    emptyOutDir: true,
   },
 });
