@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'), // `src` のエイリアスを `@` に変更（よく使われる形）
+      src: path.resolve(__dirname, './src'),
     },
   },
   server: {
