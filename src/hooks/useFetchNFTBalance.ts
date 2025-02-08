@@ -9,7 +9,7 @@ export function useFetchNFTBalance(
 ) {
   const { data, error, isLoading, ...rest } =
     useSWR<UseFetchNFTBalanceResponseDto>(
-      `/nfts/${contractId}/balance?wa=${walletAddress}`,
+      walletAddress ? `/nfts/${contractId}/balance?wa=${walletAddress}` : null,
       fetcher
     );
   return {
