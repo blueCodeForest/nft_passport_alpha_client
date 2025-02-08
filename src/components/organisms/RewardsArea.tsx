@@ -16,6 +16,7 @@ export interface TokenQuantityRewardAreaProps {
   rewards: ITokenQuantityReward[];
   holdings: number;
   symbol: string;
+  onExchangeComplete?: () => void;
 }
 
 export interface TokenVarietyRewardAreaProps {
@@ -48,6 +49,7 @@ export function RewardsArea(props: RewardsAreaProps) {
             reward={reward}
             symbol={props.symbol}
             holdings={props.holdings}
+            onExchangeComplete={props.onExchangeComplete}
           />
         ))}
       </div>

@@ -8,7 +8,7 @@ import {
   useFetchNFTHolderRanking,
   useFetchPassport,
 } from 'src/hooks';
-import { RewardType } from 'src/domain/types';
+import { RewardType, ContractType } from 'src/domain/types';
 import {
   TokenQuantityRewardAreaProps,
   TokenVarietyRewardAreaProps,
@@ -49,6 +49,7 @@ export function BrandPassportScreen() {
     data: nftBalanceData,
     error: nftBalanceError,
     isLoading: nftBalanceLoading,
+    mutate: mutateNFTBalance,
   } = useFetchNFTBalance(contractData?.id, walletAddress);
 
   if (
@@ -78,10 +79,11 @@ export function BrandPassportScreen() {
   const rewardsProps = isTokenQuantityRewards(rewardsData)
     ? ({
         rewardType: RewardType.TOKEN_QUANTITY,
-        tokenType: contractData.type,
+        tokenType: ContractType.COIN,
         rewards: rewardsData,
-        holdings: nftBalanceData,
+        holdings: nftBalanceData ?? 0,
         symbol: contractData.symbol,
+        onExchangeComplete: () => mutateNFTBalance(),
       } as TokenQuantityRewardAreaProps)
     : ({
         rewardType: RewardType.TOKEN_VARIETY,

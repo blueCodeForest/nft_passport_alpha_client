@@ -15,6 +15,7 @@ interface RewardExchangeModalProps {
   reward: Reward;
   symbol: string;
   isEnabled: boolean;
+  onExchangeComplete?: () => void;
 }
 
 export function RewardExchangeModal(props: RewardExchangeModalProps) {
@@ -43,6 +44,7 @@ export function RewardExchangeModal(props: RewardExchangeModalProps) {
       });
       setExchangeSuccess(true);
       setExchangeTime(new Date().toLocaleString('ja-JP'));
+      props.onExchangeComplete?.();
     } catch (error) {
       setError('報酬の交換に失敗しました。もう一度お試しください。');
       console.error('Exchange failed:', error);

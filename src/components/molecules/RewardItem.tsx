@@ -7,6 +7,7 @@ interface RewardItemProps {
   reward: Reward;
   symbol: string;
   holdings: number;
+  onExchangeComplete?: () => void;
 }
 
 export function RewardItem(props: RewardItemProps) {
@@ -15,9 +16,12 @@ export function RewardItem(props: RewardItemProps) {
   if (props.reward.type === RewardType.TOKEN_QUANTITY) {
     return (
       <>
-        <div className='flex items-center justify-between border-b-2 border-dashed border-lightGray px-2 py-4'>
+        <div
+          className='flex items-center justify-between border-b-2 border-dashed border-lightGray px-2 py-4'
+          onClick={() => setIsModalOpen(true)}
+        >
           <span>{props.reward.name}</span>
-          <button onClick={() => setIsModalOpen(true)}>
+          <button>
             <div
               className={`flex items-center justify-center w-24 rounded-md ${
                 props.holdings >= props.reward.condition.cost
@@ -38,6 +42,7 @@ export function RewardItem(props: RewardItemProps) {
           reward={props.reward}
           symbol={props.symbol}
           isEnabled={props.holdings >= props.reward.condition.cost}
+          onExchangeComplete={props.onExchangeComplete}
         />
       </>
     );

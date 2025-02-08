@@ -8,6 +8,7 @@ interface AttributeProps {
 const attributeTranslations: { [key: string]: string } = {
   TokenType: 'トークンタイプ',
   Issuer: '発行者',
+  Project: 'プロジェクト',
 };
 
 export function Attribute({ traitType, value }: AttributeProps) {
