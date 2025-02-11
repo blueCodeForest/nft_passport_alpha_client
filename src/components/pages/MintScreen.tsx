@@ -16,17 +16,10 @@ export function MintScreen() {
   const { chainId, contractAddress } = useParams();
   const [searchParams] = useSearchParams();
   const mintAuthKey = searchParams.get('mak');
-  const {
-    connectWallet,
-    address: walletAddress,
-    isConnected,
-  } = useWalletConnection();
+  const { address: walletAddress, isConnected } = useWalletConnection();
   const { trigger, error } = useMint(Number(chainId), contractAddress || '');
   const [shouldMint, setShouldMint] = useState(false);
-  const {
-    showModal: showWalletConnectionModal,
-    closeModal: closeWalletConnectionModal,
-  } = useWalletConnectionModal();
+  const { showModal: showWalletConnectionModal } = useWalletConnectionModal();
 
   useEffect(() => {
     if (shouldMint && isConnected && walletAddress) {

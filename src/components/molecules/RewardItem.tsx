@@ -27,6 +27,7 @@ export function RewardItem(props: RewardItemProps) {
             size='sm'
             className='w-24'
             disabled={props.holdings < props.reward.condition.cost}
+            onClick={() => setIsModalOpen(true)}
           />
           {/* <button>
             <div
