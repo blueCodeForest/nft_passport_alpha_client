@@ -33,7 +33,7 @@ export function WalletConnectionModal({
               : 'NFT Passportのサービスを利用するには、ウォレットの接続が必要です。'}
           </h3>
           <img
-            src={`/images/common/NFT_passport_concept flow_transparent.png`}
+            src={'/images/common/NFT_passport_concept_flow_transparent.png'}
             alt='NFT Passport Concept Flow'
             className='w-full h-auto mb-4'
           />
