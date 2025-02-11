@@ -1,4 +1,4 @@
-export { MintButton } from './MintButton';
+export { CustomButton } from './CustomButton';
 export { ContractImage } from './ContractImage';
 export { HistoryDate } from './HistoryDate';
 export { HistoryIcon } from './HistoryIcon';

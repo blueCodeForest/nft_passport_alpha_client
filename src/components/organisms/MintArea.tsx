@@ -1,5 +1,5 @@
 import { ContractType } from 'src/domain/types';
-import { MintButton } from '../atoms';
+import { CustomButton } from '../atoms';
 import { ContractCover } from '../molecules';
 
 interface MintAreaProps {
@@ -13,7 +13,12 @@ export function MintArea({ name, imageUrl, type, onMint }: MintAreaProps) {
   return (
     <div>
       <ContractCover title={name} image={imageUrl} />
-      <MintButton type={type as ContractType} onClick={onMint} />
+      <CustomButton
+        label={
+          type === ContractType.COIN ? 'コインを取得する' : 'スタンプを押す'
+        }
+        onClick={onMint}
+      />
     </div>
   );
 }

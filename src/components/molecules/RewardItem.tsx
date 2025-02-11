@@ -1,6 +1,7 @@
 import { Reward, RewardType } from 'src/domain/types';
 import { RewardExchangeModal } from '../organisms/RewardExchangeModal';
 import { useState } from 'react';
+import { CustomButton } from '../atoms';
 
 interface RewardItemProps {
   key: number;
@@ -21,7 +22,13 @@ export function RewardItem(props: RewardItemProps) {
           onClick={() => setIsModalOpen(true)}
         >
           <span>{props.reward.name}</span>
-          <button>
+          <CustomButton
+            label={`${props.reward.condition.cost} ${props.symbol}`}
+            size='sm'
+            className='w-24'
+            disabled={props.holdings < props.reward.condition.cost}
+          />
+          {/* <button>
             <div
               className={`flex items-center justify-center w-24 rounded-md ${
                 props.holdings >= props.reward.condition.cost
@@ -33,7 +40,7 @@ export function RewardItem(props: RewardItemProps) {
                 {props.reward.condition.cost} {props.symbol}
               </span>
             </div>
-          </button>
+          </button> */}
         </div>
 
         <RewardExchangeModal

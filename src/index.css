@@ -12,6 +12,17 @@
     --header-height: calc(2.5rem + 1px + env(safe-area-inset-top));
   }
 
+  @font-face {
+    font-family: 'Tsunagi Gothic';
+    src: url('/fonts/TsunagiGothic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .logo {
+    font-family: 'Tsunagi Gothic', sans-serif;
+  }
+
   @supports (height: 100dvh) {
     :root {
       --header-height: calc(2.5rem + 1px + env(safe-area-inset-top));

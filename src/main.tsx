@@ -18,6 +18,7 @@ import {
 import { MintModalProvider } from 'src/components/organisms';
 import { SWRConfig } from 'swr';
 import { MainLayout } from 'src/components/layouts';
+import { WalletConnectionModalProvider } from './components/organisms/WalletConnectionModalContext.tsx';
 (globalThis as any).Buffer = Buffer;
 
 const queryClient = new QueryClient();
@@ -27,33 +28,38 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <SWRConfig>
-          <MintModalProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route element={<MainLayout />}>
-                  <Route
-                    path='/mint/evm/:chainId/:contractAddress'
-                    element={<MintScreen />}
-                  />
-                  <Route
-                    path='/contract/:contractId'
-                    element={<ContractScreen />}
-                  />
-                  <Route
-                    path='/wallet/:walletAddress'
-                    element={<WalletScreen />}
-                  />
-                  <Route path='/passport' element={<PassportRoot />}>
-                    <Route path='brand/:id' element={<BrandPassportScreen />} />
+          <WalletConnectionModalProvider>
+            <MintModalProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route element={<MainLayout />}>
                     <Route
-                      path='collection/:id'
-                      element={<CollectionPassportScreen />}
+                      path='/mint/evm/:chainId/:contractAddress'
+                      element={<MintScreen />}
                     />
+                    <Route
+                      path='/contract/:contractId'
+                      element={<ContractScreen />}
+                    />
+                    <Route
+                      path='/wallet/:walletAddress'
+                      element={<WalletScreen />}
+                    />
+                    <Route path='/passport' element={<PassportRoot />}>
+                      <Route
+                        path='brand/:id'
+                        element={<BrandPassportScreen />}
+                      />
+                      <Route
+                        path='collection/:id'
+                        element={<CollectionPassportScreen />}
+                      />
+                    </Route>
                   </Route>
-                </Route>
-              </Routes>
-            </BrowserRouter>
-          </MintModalProvider>
+                </Routes>
+              </BrowserRouter>
+            </MintModalProvider>
+          </WalletConnectionModalProvider>
         </SWRConfig>
       </QueryClientProvider>
     </WagmiProvider>

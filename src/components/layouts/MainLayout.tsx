@@ -2,10 +2,11 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { CustomIcon } from '../atoms/CustomIcon';
 import { useWalletConnection } from 'src/hooks';
 import { useState } from 'react';
+import { useWalletConnectionModal } from 'src/hooks/useWalletConnectionModal';
 
 export function MainLayout() {
-  const { connectWallet, address, isConnected, disconnect } =
-    useWalletConnection();
+  const { address, isConnected, disconnect } = useWalletConnection();
+  const { showModal } = useWalletConnectionModal();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showCopied, setShowCopied] = useState(false);
@@ -25,7 +26,7 @@ export function MainLayout() {
     <div className='min-h-screen'>
       <header className='fixed top-0 left-0 right-0 bg-white border-b border-lightGray z-50'>
         <div className='container max-w-screen-sm mx-auto px-4 py-2 flex justify-between items-center'>
-          <h1 className='text-xl font-bold'>NFT Passport</h1>
+          <h1 className='text-xl font-bold logo'>NFT Passport</h1>
           <div className='relative'>
             {isConnected ? (
               <div className='flex items-center gap-2'>
@@ -76,7 +77,7 @@ export function MainLayout() {
             ) : (
               !isMintPage && (
                 <button
-                  onClick={async () => await connectWallet()}
+                  onClick={() => showModal()}
                   className='text-sm text-blue-500'
                 >
                   ウォレット接続

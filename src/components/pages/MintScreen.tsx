@@ -8,6 +8,7 @@ import {
   useWalletConnection,
 } from 'src/hooks';
 import { useEffect, useState } from 'react';
+import { useWalletConnectionModal } from 'src/hooks/useWalletConnectionModal';
 
 export function MintScreen() {
   const navigate = useNavigate();
@@ -22,6 +23,10 @@ export function MintScreen() {
   } = useWalletConnection();
   const { trigger, error } = useMint(Number(chainId), contractAddress || '');
   const [shouldMint, setShouldMint] = useState(false);
+  const {
+    showModal: showWalletConnectionModal,
+    closeModal: closeWalletConnectionModal,
+  } = useWalletConnectionModal();
 
   useEffect(() => {
     if (shouldMint && isConnected && walletAddress) {
@@ -71,13 +76,7 @@ export function MintScreen() {
     setShouldMint(true);
 
     if (!isConnected) {
-      try {
-        await connectWallet();
-      } catch (err) {
-        console.error('Wallet connection failed:', err);
-        showErrorModal();
-        setShouldMint(false);
-      }
+      showWalletConnectionModal();
       return;
     }
 

@@ -45,6 +45,7 @@ module.exports = {
         'emojione-monotone',
         'solar',
         'lucide',
+        'mdi',
       ]),
     }),
     dynamicIconsPlugin(),

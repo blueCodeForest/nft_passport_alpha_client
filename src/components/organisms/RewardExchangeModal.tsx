@@ -8,6 +8,7 @@ import { Reward, RewardType } from 'src/domain/types';
 import { useExchangeReward } from 'src/hooks/useExchangeReward';
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
+import { CustomButton } from '../atoms';
 
 interface RewardExchangeModalProps {
   isOpen: boolean;
@@ -55,7 +56,7 @@ export function RewardExchangeModal(props: RewardExchangeModalProps) {
     <Dialog open={props.isOpen} onClose={handleClose} className='relative z-50'>
       <div className='fixed inset-0 bg-black/30' aria-hidden='true' />
       <div className='fixed inset-0 flex items-center justify-center p-4'>
-        <DialogPanel className='mx-auto max-w-sm rounded bg-white p-6'>
+        <DialogPanel className='mx-auto max-w-sm rounded bg-background p-6'>
           <DialogTitle className='text-lg font-bold'>
             {props.reward.name}
           </DialogTitle>
@@ -86,15 +87,15 @@ export function RewardExchangeModal(props: RewardExchangeModalProps) {
           ) : (
             <div className='mt-4 space-y-2'>
               {props.reward.type === RewardType.TOKEN_QUANTITY && (
-                <button
-                  className='w-full py-2 px-4 bg-blue-500 text-white rounded disabled:opacity-50'
+                <CustomButton
+                  label={
+                    isMutating
+                      ? '処理中...'
+                      : `報酬と交換する (${props.reward.condition.cost} ${props.symbol})`
+                  }
                   onClick={() => handleExchange()}
                   disabled={!props.isEnabled || isMutating || !address}
-                >
-                  {isMutating
-                    ? '処理中...'
-                    : `報酬と交換する (${props.reward.condition.cost} ${props.symbol})`}
-                </button>
+                />
               )}
               {props.reward.type === RewardType.TOKEN_VARIETY && (
                 <button
