@@ -13,3 +13,4 @@ export { TotalSupply } from './TotalSupply';
 export { HolderCount } from './HolderCount';
 export { Attributes } from './Attributes';
 export { PassportItem } from './PassportItem';
+export { LineAuthRequiredScreen } from '../pages/LineAuthRequiredScreen';

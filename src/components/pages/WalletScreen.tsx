@@ -5,11 +5,11 @@ import {
 } from 'src/hooks';
 import { useParams } from 'react-router-dom';
 import { HistoriesArea, PassportsArea, OwnNFTsArea } from '../organisms';
-import { useWalletConnection } from 'src/hooks';
+import { useWallet } from 'src/hooks';
 
 export function WalletScreen() {
   const { walletAddress: paramWalletAddress } = useParams();
-  const { address: connectedWalletAddress } = useWalletConnection();
+  const { address: walletAddress } = useWallet();
 
   const {
     data: nftsData,
@@ -38,8 +38,7 @@ export function WalletScreen() {
     <div className='container max-w-screen-sm'>
       <OwnNFTsArea nfts={nftsData ?? []} />
       <PassportsArea passports={passportsData ?? []} />
-      {connectedWalletAddress?.toLowerCase() ===
-        paramWalletAddress?.toLowerCase() && (
+      {walletAddress?.toLowerCase() === paramWalletAddress?.toLowerCase() && (
         <HistoriesArea histories={historiesData ?? []} />
       )}
     </div>

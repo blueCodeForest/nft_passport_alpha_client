@@ -2,7 +2,11 @@ import { useParams } from 'react-router-dom';
 import { BrandPassportHeader } from '../organisms/BrandPassportHeader';
 import { RewardsArea } from '../organisms/RewardsArea';
 import { RankingArea } from '../organisms/RankingArea';
-import { useFetchContractWithStats, useFetchNFTBalance } from 'src/hooks';
+import {
+  useFetchContractWithStats,
+  useFetchNFTBalance,
+  useWallet,
+} from 'src/hooks';
 import {
   useFetchRewards,
   useFetchNFTHolderRanking,
@@ -14,12 +18,11 @@ import {
   TokenVarietyRewardAreaProps,
 } from '../organisms/RewardsArea';
 import { isTokenQuantityRewards } from 'src/domain/guards';
-import { useWalletConnection } from 'src/hooks';
 
 export function BrandPassportScreen() {
   const { id } = useParams();
   const passportId = Number(id);
-  const { address: walletAddress } = useWalletConnection();
+  const { address: walletAddress } = useWallet();
 
   const {
     data: contractData,
@@ -50,7 +53,18 @@ export function BrandPassportScreen() {
     error: nftBalanceError,
     isLoading: nftBalanceLoading,
     mutate: mutateNFTBalance,
-  } = useFetchNFTBalance(contractData?.id, walletAddress);
+  } = useFetchNFTBalance(
+    contractData ? contractData.id : undefined,
+    contractData && walletAddress ? walletAddress : undefined,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      refreshWhenHidden: false,
+      refreshWhenOffline: false,
+      shouldRetryOnError: true,
+    }
+  );
 
   if (
     contractLoading ||
@@ -76,7 +90,9 @@ export function BrandPassportScreen() {
     return <div>データが見つかりません</div>;
   }
 
-  const rewardsProps = isTokenQuantityRewards(rewardsData)
+  const isQuantityRewards = isTokenQuantityRewards(rewardsData);
+
+  const rewardsProps = isQuantityRewards
     ? ({
         rewardType: RewardType.TOKEN_QUANTITY,
         tokenType: ContractType.COIN,
@@ -87,20 +103,31 @@ export function BrandPassportScreen() {
       } as TokenQuantityRewardAreaProps)
     : ({
         rewardType: RewardType.TOKEN_VARIETY,
+        tokenType: ContractType.STAMP,
         rewards: rewardsData,
         requiredHoldings: 0,
         optionalHoldings: 0,
       } as TokenVarietyRewardAreaProps);
 
-  return (
-    <div className='container max-w-screen-sm mt-2'>
-      <BrandPassportHeader passport={passportData} contract={contractData} />
-      <RewardsArea {...rewardsProps} />
-      <RankingArea
-        ranking={rankingData.ranking}
-        symbol={contractData.symbol}
-        pagination={rankingData.pagination}
-      />
-    </div>
-  );
+  try {
+    return (
+      <div className='container max-w-screen-sm mt-2'>
+        <BrandPassportHeader passport={passportData} contract={contractData} />
+        <RewardsArea {...rewardsProps} />
+        <RankingArea
+          ranking={rankingData.ranking}
+          symbol={contractData.symbol}
+          pagination={rankingData.pagination}
+        />
+      </div>
+    );
+  } catch (error) {
+    console.error('レンダリング中にエラーが発生しました', error);
+    return (
+      <div>
+        レンダリングエラー:{' '}
+        {error instanceof Error ? error.message : String(error)}
+      </div>
+    );
+  }
 }

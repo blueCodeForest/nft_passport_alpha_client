@@ -20,5 +20,11 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    rollupOptions: {
+      external: [/src\/authBackup\/.*/],
+    },
+  },
+  define: {
+    'process.env.VITE_LIFF_ID': JSON.stringify(process.env.VITE_LIFF_ID),
   },
 });

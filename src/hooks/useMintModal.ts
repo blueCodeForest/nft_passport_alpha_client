@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { MintModalContext } from 'src/components/organisms/MintModalContext';
+import { MintModalContext } from 'src/providers';
 
 export const useMintModal = () => {
   const context = useContext(MintModalContext);

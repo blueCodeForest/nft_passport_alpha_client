@@ -12,33 +12,58 @@ class APIError extends Error {
 const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
 export const fetcher = async (targetPath: string) => {
-  const res = await fetch(new URL(targetPath, BASE_URL));
-  if (!res.ok) {
-    throw new APIError(
-      res.status,
-      res.statusText,
-      await res.json().catch(() => null)
-    );
+  try {
+    const url = new URL(targetPath, BASE_URL).toString();
+
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      mode: 'cors',
+    });
+
+    if (!res.ok) {
+      console.error('API Error:', res.status, res.statusText);
+      throw new APIError(
+        res.status,
+        res.statusText,
+        await res.json().catch(() => null)
+      );
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error('Fetch error:', error);
+    throw error;
   }
-  return res.json();
 };
 
 export const mutator = async (targetPath: string, arg: any) => {
-  const res = await fetch(new URL(targetPath, BASE_URL), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(arg),
-  });
+  try {
+    const url = new URL(targetPath, BASE_URL).toString();
 
-  if (!res.ok) {
-    throw new APIError(
-      res.status,
-      res.statusText,
-      await res.json().catch(() => null)
-    );
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(arg),
+      mode: 'cors',
+    });
+
+    if (!res.ok) {
+      console.error('API Error:', res.status, res.statusText);
+      throw new APIError(
+        res.status,
+        res.statusText,
+        await res.json().catch(() => null)
+      );
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error('Fetch error:', error);
+    throw error;
   }
-
-  return res.json();
 };
