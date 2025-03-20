@@ -29,19 +29,6 @@ export function RewardItem(props: RewardItemProps) {
             disabled={props.holdings < props.reward.condition.cost}
             onClick={() => setIsModalOpen(true)}
           />
-          {/* <button>
-            <div
-              className={`flex items-center justify-center w-24 rounded-md ${
-                props.holdings >= props.reward.condition.cost
-                  ? 'border-2 border-darkGray bg-transparent text-darkGray'
-                  : 'bg-lightGray text-white'
-              } font-bold`}
-            >
-              <span>
-                {props.reward.condition.cost} {props.symbol}
-              </span>
-            </div>
-          </button> */}
         </div>
 
         <RewardExchangeModal

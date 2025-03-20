@@ -1,5 +1,4 @@
 export { MintArea } from './MintArea';
-export { MintModalProvider } from './MintModalContext';
 export { RankingArea } from './RankingArea';
 export { RewardsArea } from './RewardsArea';
 export { BrandPassportHeader } from './BrandPassportHeader';
@@ -8,5 +7,3 @@ export { ContractDetails } from './ContractDetails';
 export { PassportsArea } from './PassportsArea';
 export { OwnNFTsArea } from './OwnNFTsArea';
 export { HistoriesArea } from './HistoriesArea';
-export * from './WalletConnectionModalContext';
-export * from './WalletConnectionModal';

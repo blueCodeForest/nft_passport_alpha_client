@@ -192,6 +192,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/wallets/{id}/ethereum-address": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** ウォレットアドレス取得 */
+        get: operations["WalletController_getWalletAddress"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -248,9 +265,13 @@ export interface components {
             /** @description 画像URL */
             imageUrl: string;
             /** @description 説明 */
-            description: string;
+            description?: string;
+            /** @description アニメーションURL */
+            animationUrl?: string;
+            /** @description 外部URL */
+            externalUrl?: string;
             /** @description 属性 */
-            attributes: components["schemas"]["AttributeDto"][];
+            attributes?: components["schemas"]["AttributeDto"][];
         };
         ContractWithMetadataDto: {
             /** @description コントラクトID */
@@ -582,6 +603,13 @@ export interface components {
         GetHistoriesResponseDto: {
             histories: (components["schemas"]["MintHistoryDto"] | components["schemas"]["TokenQuantityRewardHistoryDto"] | components["schemas"]["TokenVarietyRewardHistoryDto"])[];
             pagination: components["schemas"]["PaginationDto"];
+        };
+        WalletAddressResponseDto: {
+            /**
+             * @description Ethereumアドレス
+             * @example 0x1234567890abcdef
+             */
+            address: string;
         };
     };
     responses: never;
@@ -1002,6 +1030,39 @@ export interface operations {
                 };
                 content: {
                     "application/json; charset=utf-8": components["schemas"]["GetHistoriesResponseDto"];
+                };
+            };
+            /** @description 無効なリクエスト */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    WalletController_getWalletAddress: {
+        parameters: {
+            query: {
+                /** @description ソルト */
+                salt: string;
+            };
+            header?: never;
+            path: {
+                /** @description ユーザーID */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json; charset=utf-8": components["schemas"]["WalletAddressResponseDto"];
                 };
             };
             /** @description 無効なリクエスト */

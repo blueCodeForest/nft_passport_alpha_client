@@ -1,6 +1,6 @@
 import { createContext, useState, ReactNode } from 'react';
 import { ContractType } from 'src/domain/types';
-import { MintModals } from './MintModals';
+import { MintModals } from '../components/organisms/MintModals';
 
 type ModalType = 'minting' | 'success' | 'error' | null;
 

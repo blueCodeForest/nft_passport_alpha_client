@@ -28,7 +28,6 @@ export interface TokenVarietyRewardAreaProps {
 }
 
 export function RewardsArea(props: RewardsAreaProps) {
-  console.log('props', props);
   if (props.rewardType === RewardType.TOKEN_QUANTITY) {
     const tokenHoldingsProps: CoinHoldings = {
       tokenType: props.tokenType,

@@ -7,8 +7,8 @@ import {
 import { Reward, RewardType } from 'src/domain/types';
 import { useExchangeReward } from 'src/hooks/useExchangeReward';
 import { useState } from 'react';
-import { useAccount } from 'wagmi';
 import { CustomButton } from '../atoms';
+import { useWallet } from 'src/hooks';
 
 interface RewardExchangeModalProps {
   isOpen: boolean;
@@ -20,7 +20,7 @@ interface RewardExchangeModalProps {
 }
 
 export function RewardExchangeModal(props: RewardExchangeModalProps) {
-  const { address } = useAccount();
+  const { address } = useWallet();
   const { trigger: exchangeReward, isMutating } = useExchangeReward(
     props.reward.id
   );

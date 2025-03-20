@@ -1,6 +1,6 @@
 import { ContractType } from 'src/domain/types';
-import { CustomButton } from '../atoms';
 import { ContractCover } from '../molecules';
+import { CustomButton } from '../atoms';
 
 interface MintAreaProps {
   name: string;
@@ -10,15 +10,16 @@ interface MintAreaProps {
 }
 
 export function MintArea({ name, imageUrl, type, onMint }: MintAreaProps) {
+  // ボタンのラベルを決定
+  const buttonLabel =
+    type === ContractType.COIN ? 'コインを取得する' : 'スタンプを押す';
+
   return (
-    <div>
+    <div className='flex flex-col space-y-4'>
       <ContractCover title={name} image={imageUrl} />
-      <CustomButton
-        label={
-          type === ContractType.COIN ? 'コインを取得する' : 'スタンプを押す'
-        }
-        onClick={onMint}
-      />
+      <div className='flex flex-col items-center'>
+        <CustomButton label={buttonLabel} onClick={onMint} />
+      </div>
     </div>
   );
 }

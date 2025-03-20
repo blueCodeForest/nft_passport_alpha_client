@@ -5,10 +5,8 @@ import {
   useFetchContractCover,
   useMint,
   useMintModal,
-  useWalletConnection,
+  useWallet,
 } from 'src/hooks';
-import { useEffect, useState } from 'react';
-import { useWalletConnectionModal } from 'src/hooks/useWalletConnectionModal';
 
 export function MintScreen() {
   const navigate = useNavigate();
@@ -16,26 +14,40 @@ export function MintScreen() {
   const { chainId, contractAddress } = useParams();
   const [searchParams] = useSearchParams();
   const mintAuthKey = searchParams.get('mak');
-  const { address: walletAddress, isConnected } = useWalletConnection();
-  const { trigger, error } = useMint(Number(chainId), contractAddress || '');
-  const [shouldMint, setShouldMint] = useState(false);
-  const { showModal: showWalletConnectionModal } = useWalletConnectionModal();
+  const { address: walletAddress } = useWallet();
+  const { trigger } = useMint(Number(chainId), contractAddress || '');
 
-  useEffect(() => {
-    if (shouldMint && isConnected && walletAddress) {
-      executeMint();
+  const {
+    data: contractData,
+    isLoading,
+    error: fetchError,
+  } = useFetchContractCover(Number(chainId), contractAddress || '');
+
+  const handleMint = async () => {
+    if (!mintAuthKey) {
+      alert(
+        'うまく情報が読み込めません。\nもう一度QRコードをスキャンしてください。'
+      );
+      console.error('mintAuthKey is required');
+      return;
     }
-  }, [shouldMint, isConnected, walletAddress]);
 
-  const executeMint = async () => {
-    if (!mintAuthKey) return;
+    if (!walletAddress) {
+      console.error('Wallet address is not available');
+      return;
+    }
+
+    if (!contractData) {
+      console.error('Contract data is not available');
+      return;
+    }
 
     showMintingModal();
 
     try {
       const result = await trigger({
         mintAuthKey,
-        walletAddress: walletAddress!,
+        walletAddress: walletAddress,
       });
       console.log('Mint successful:', result);
       const mintedNFT = {
@@ -52,35 +64,11 @@ export function MintScreen() {
       });
       navigate(`/wallet/${walletAddress}`, { state: { mintedNFT } });
     } catch (err) {
-      console.error('Mint failed:', error);
+      console.error('Mint failed:', err);
       showErrorModal();
     }
   };
 
-  const handleMint = async () => {
-    if (!mintAuthKey) {
-      alert(
-        'うまく情報が読み込めません。\nもう一度QRコードをスキャンしてください。'
-      );
-      console.error('mintAuthKey is required');
-      return;
-    }
-
-    setShouldMint(true);
-
-    if (!isConnected) {
-      showWalletConnectionModal();
-      return;
-    }
-
-    executeMint();
-  };
-
-  const {
-    data: contractData,
-    isLoading,
-    error: fetchError,
-  } = useFetchContractCover(Number(chainId), contractAddress || '');
   if (isLoading) return <div>Loading...</div>;
   if (fetchError) return <div>Error: {fetchError.message}</div>;
 
