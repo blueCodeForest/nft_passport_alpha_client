@@ -12,3 +12,4 @@ export { useFetchNFTBalance } from './useFetchNFTBalance';
 export { useExchangeReward } from './useExchangeReward';
 export { useWallet } from './useWallet';
 export { useMintModal } from './useMintModal';
+export { useFetchWalletAddress } from './useFetchWalletAddress';
