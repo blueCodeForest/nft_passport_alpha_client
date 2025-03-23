@@ -26,27 +26,12 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
-  // ユーザー固有のsalt値を生成または取得
-  const getUserSalt = (): string => {
-    const storedSalt = localStorage.getItem('walletSalt');
-    if (storedSalt) {
-      return storedSalt;
-    }
-
-    // 新しいsalt値を生成して保存
-    const newSalt = uuidv4();
-    localStorage.setItem('walletSalt', newSalt);
-    return newSalt;
-  };
-
-  // ウォレット情報の取得処理をコンポーネントのトップレベルで実行
-  const salt = getUserSalt();
   const fetchCondition = isInitialized && isLoggedIn && profile;
   const {
     data,
     error: fetchError,
     isLoading,
-  } = useFetchWalletAddress(fetchCondition ? profile.userId : null, salt);
+  } = useFetchWalletAddress(fetchCondition ? profile.userId : null);
 
   // ウォレットアドレスを設定
   useEffect(() => {
