@@ -1043,10 +1043,7 @@ export interface operations {
     };
     WalletController_getWalletAddress: {
         parameters: {
-            query: {
-                /** @description ソルト */
-                salt: string;
-            };
+            query?: never;
             header?: never;
             path: {
                 /** @description ユーザーID */
